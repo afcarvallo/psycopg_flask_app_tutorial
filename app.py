@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-import psycopg2 #pip install psycopg2 
+import psycopg2 #pip install psycopg2 , para python3.9 usar pip3 install psycopg2-binary
 import psycopg2.extras
  
 app = Flask(__name__)

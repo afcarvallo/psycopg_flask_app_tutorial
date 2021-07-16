@@ -14,7 +14,7 @@ app.secret_key = 'andres1234' # esta secret key permite borrar objetos de la apl
 # INSERT INTO personas VALUES ('4', 'Julio', 'Green', 'mail4@mail.com');
 # ALTER SEQUENCE personas_id_seq RESTART WITH 9;
 
-# recordar verificar los permisos para poder borrar e insertar elementos a la BD 
+# recordar verificar los permisos para borrar e insertar elementos a la BD 
 # \du 
 # alter role <user-name> superuser; 
 DB_HOST = "localhost" # localhost 
@@ -42,7 +42,8 @@ def add_persona():
         apellido = request.form['apellido']
         email = request.form['email']
  
-        cur.execute("INSERT INTO personas (nombre, apellido, email) VALUES (%s,%s,%s)", (nombre, apellido, email)) # inserta elementos ingresados en el formulario
+        # inserta elementos ingresados en el formulario en inddex.html 
+        cur.execute("INSERT INTO personas (nombre, apellido, email) VALUES (%s,%s,%s)", (nombre, apellido, email)) 
 
         conn.commit() # hace efectivos los cambios en la BD 
 
@@ -54,8 +55,9 @@ def delete_person(id):
 
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor) # establece conexion con la BD 
 
-    cur.execute('DELETE FROM personas WHERE id = {0}'.format(id)) # quita elementos que tengan ese id en la tabla 
-
+    # quita elementos que tengan ese id en la tabla 
+    cur.execute('DELETE FROM personas WHERE id = {0}'.format(id)) 
+    
     conn.commit() # hace efectivos los cambios en la BD 
 
     # envia la instruccion a index.html para quitar ese registro de la tabla en la pagina web 
@@ -63,3 +65,8 @@ def delete_person(id):
  
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+
+
